@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Flask Pokédex</title>
+    <script src="https://kit.fontawesome.com/abb211c046.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <!-- Pokédex Header -->
+    <div class="header">
+        <img id="titulo-img" src="{{ url_for('static', filename='pokelogo.png') }}" alt="Pokémon Logo">
+    </div>
+    
+    <!-- Pokédex Container -->
+    <div class="container">
+        <ul class="pokemons">
+            {% for poke in pokemons %}
+            <li class="poke-container {{poke['types'][0]}} {{poke['types'][1]}}">
+                <div id="pokebola-icon">
+                    <h2 class="id">{{ poke['id'] }}</h2>
+                </div>
+                <h1 class="nome">{{ poke['name'] }}</h1>
+                <img src="{{ poke['image'] }}">
+                <p class="descricao"><b>Descrição: </b>{{ poke['description'] }}</p>
+                <hr>
+                {% if poke['types']|length == 1 %}
+                    <p class="tipo"><b>Tipo: </b>{{ poke['types'][0] }}</p>
+                {% else %}
+                    <p class="tipo"><b>Tipo: </b>{{ poke['types'][0] }} / {{ poke['types'][1] }}</p>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Pokédex Footer -->
+    <div class="footer">
+        <a href="https://github.com/verezeeee" target="_blank"><i class="fab fa-github fa-3x"></i></a>
+    </div>
+</body>
+
+</html>
